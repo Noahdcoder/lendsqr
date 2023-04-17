@@ -46,8 +46,10 @@
     form {
       display: flex;
       flex-direction: column;
+      margin-top: 50px;
+      gap: 2rem;
+      white-space: nowrap;
       input {
-        width: 447px;
         height: 50px;
         border: 2px solid rgba(84, 95, 125, 0.15);
         border-radius: 5px;
@@ -61,6 +63,40 @@
           line-height: 19px;
           color: #545f7d;
           opacity: 0.6;
+        }
+      }
+      p {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.1em;
+        color: #39cdcc;
+        cursor: pointer;
+      }
+      button {
+        /* Reset default styles */
+        background: #39cdcc;
+        border: none;
+        border-radius: 8px;
+        margin: 0;
+        padding: 8px;
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+        font-family: Montserrat;
+        color: #ffffff;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 19px;
+        /* identical to box height */
+        text-align: center;
+        letter-spacing: 0.1em;
+        /* Add your own custom styles here */
+        &:hover {
+          opacity: 0.75;
         }
       }
       .input_container {
@@ -79,9 +115,16 @@
           height: 100%;
           background: none; // Remove background color
           border: none; // Remove border
-          color: black; // Set text color
           cursor: pointer; // Show pointer cursor
-          font-size: inherit; // Inherit font size from parent
+          font-family: Montserrat;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 16px;
+          text-align: center;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #39cdcc;
+          font-size: 12px; // Inherit font size from parent
           padding: 0; // Remove padding
         }
       }
@@ -97,7 +140,16 @@
       max-width: 75%;
     }
     input {
-      width: 100%;
+      width: 20rem;
+    }
+  }
+}
+
+/* Styles for screens larger than 768px */
+@media (min-width: 768px) {
+  .main {
+    input {
+      width: 447px;
     }
   }
 }

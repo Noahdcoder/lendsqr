@@ -1,0 +1,45 @@
+.aside {
+  padding: 2rem;
+  div {
+    margin-bottom: 1rem;
+  }
+  span {
+    margin-right: 1rem;
+  }
+  h4,
+  h5 {
+    padding-top: 0.5rem; /* Add 0.5rem padding to the top */
+    padding-bottom: 1rem;
+    font-family: "Work Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #213f7d;
+  }
+  h4 {
+    font-weight: 600;
+  }
+  h6 {
+    padding-top: 0.5rem;
+    font-family: "Work Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    color: #545f7d;
+  }
+  p {
+    padding: 0.5rem 0;
+    font-family: "Work Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #213f7d;
+    white-space: nowrap;
+  }
+  .switch_span {
+    margin-left: 0.5rem;
+  }
+}
