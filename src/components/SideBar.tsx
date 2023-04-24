@@ -4,9 +4,13 @@ import { faChevronDown, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { customers, businesses, settings } from "../../data/data";
 import { renderIcon } from "../../utils/iconRenderer";
 
-export default function SideBar() {
+type Props = {
+  isSideBar: boolean;
+};
+
+export default function SideBar({ isSideBar }: Props) {
   return (
-    <aside className={styles.aside}>
+    <aside className={`${styles.aside} ${isSideBar ? styles.slideIn : null}`}>
       <h4>
         Switch Org
         <FontAwesomeIcon className={styles.switch_span} icon={faChevronDown} />

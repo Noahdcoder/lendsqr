@@ -1,0 +1,41 @@
+.hamburgerMenu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hamburgerMenu {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: space-around;
+    flex-flow: column nowrap;
+    z-index: 10;
+    .line {
+      width: 2rem;
+      height: 0.25rem;
+      border-radius: 10px;
+      background-color: rgb(41, 31, 184);
+      transform-origin: 1px;
+      transition: all 0.3s linear;
+    }
+    .line1 {
+      transform: rotate(0);
+      &.open {
+        transform: rotate(45deg);
+      }
+    }
+    .line2 {
+      transform: translate(0);
+      &.open {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+    .line3 {
+      transform: rotate(0);
+      &.open {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@
 
 .body {
   display: flex;
+  position: relative;
 }
 
 .main {
@@ -21,7 +22,6 @@
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
   .table {
-    height: 1000px;
     background: #ffffff;
     border: 1px solid rgba(33, 63, 125, 0.06);
     box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
@@ -47,6 +47,82 @@
       font-size: 14px;
       line-height: 16px;
       color: #545f7d;
+    }
+    tbody {
+      position: relative;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 1.5rem;
+      background: #ffffff;
+      width: 20rem;
+      border: 1px solid rgba(84, 95, 125, 0.14);
+      box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+      border-radius: 4px;
+      .filterForm {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        .formGroup {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          label {
+            font-family: "Work Sans";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            color: #545f7d;
+          }
+          input {
+            background: #ffffff;
+            opacity: 0.8;
+            border: 1px solid #213f7d;
+            border-radius: 8px;
+            padding: 1rem;
+            &::placeholder {
+              font-family: "Work Sans";
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 16px;
+              color: #545f7d;
+              opacity: 0.7;
+            }
+          }
+          select {
+            background: #ffffff;
+            opacity: 0.8;
+            border: 1px solid #213f7d;
+            border-radius: 8px;
+            padding: 1rem;
+          }
+        }
+        .submit {
+          display: flex;
+          gap: 1rem;
+          button {
+            width: 50%;
+          }
+          .reset {
+            background: #ffffff;
+            border: 1px solid rgba(84, 95, 125, 0.14);
+            box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+            border-radius: 8px;
+            padding: 1rem;
+            color: #545f7d;
+          }
+          .filter {
+            background: #39cdcc;
+            border: 1px solid #39cdcc;
+            border-radius: 8px;
+            color: #ffffff;
+          }
+        }
+      }
     }
   }
 }
@@ -105,25 +181,11 @@
 }
 
 @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    .logo_container {
-      padding: 1rem;
-      gap: 2rem;
-      input {
-        width: 12rem;
-      }
-    }
-    .docs_container {
-      padding: 1rem;
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  .logo_container {
-    input {
-      width: 25rem;
+  .main {
+    .table {
+      display: block;
+      max-width: 100%;
+      overflow: scroll;
     }
   }
 }

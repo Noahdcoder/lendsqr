@@ -67,7 +67,7 @@ export const businesses = [
     text: "Settlements",
   },
   {
-    id: 8,
+    id: 9,
     text: "Reports",
   },
 ];

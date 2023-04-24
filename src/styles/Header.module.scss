@@ -91,3 +91,27 @@
     }
   }
 }
+
+@media (min-width: 768px) {
+  .logo_container {
+    input {
+      width: 25rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    .logo_container {
+      padding: 1rem;
+      gap: 2rem;
+      input {
+        width: 9rem;
+      }
+    }
+    .docs_container {
+      padding: 1rem;
+    }
+  }
+}

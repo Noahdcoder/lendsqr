@@ -1,31 +1,23 @@
 import React from "react"; // Add this import statement
 import Head from "next/head";
-import Image from "next/image";
 import styles from "@/styles/Dashboard.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronDown,
-  faChevronLeft,
-  faChevronRight,
-  faEllipsisVertical,
-} from "@fortawesome/free-solid-svg-icons";
-import CardSingle from "@/components/CardSingle";
-import { header } from "../../data/dashboardData";
+import CardSection from "@/components/CardSection";
 import Header from "@/components/Header";
 import { useState, useEffect } from "react";
 import SideBar from "@/components/SideBar";
+import Table from "@/components/Table";
+import Pagination from "@/components/Pagination";
 
 export default function Dashboard() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [pageNumbers, setPageNumbers] = useState<number[]>([]);
-  const [showFilter, setShowFilter] = useState(false); // State variable to keep track of filter visibility
-  const [orgNameFilter, setOrgNameFilter] = useState(""); // State variable for orgName filter
-  const [userNameFilter, setUserNameFilter] = useState(""); // State variable for userName filter
+  const [isDivVisible, setDivVisible] = useState(false);
+  const [isSideBar, setSideBar] = useState(false);
 
-  const handleSortClick = () => {
-    setShowFilter(!showFilter); // Toggle filter visibility
+  const handleSortImageClick = () => {
+    setDivVisible(!isDivVisible);
   };
 
   useEffect(() => {
@@ -66,6 +58,10 @@ export default function Dashboard() {
     // Explicitly specify the type
     setCurrentPage(pageNumber);
   };
+
+  const toggleSidebar = () => {
+    setSideBar(!isSideBar);
+  };
   return (
     <>
       <Head>
@@ -74,134 +70,31 @@ export default function Dashboard() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Header toggleSidebar={toggleSidebar} isSideBar={isSideBar} />
       <div className={styles.body}>
-        <SideBar />
+        <SideBar isSideBar={isSideBar} />
         <main className={styles.main}>
           <h1>Users</h1>
           <div className={styles.parent_grid}>
-            <CardSingle />
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  {header.map((heading, index) => {
-                    const { id, text } = heading;
-                    return (
-                      <th key={id}>
-                        {text}{" "}
-                        <Image
-                          src="/images/sort.png"
-                          height={10.67}
-                          width={16}
-                          alt="filter"
-                          className={styles.filter}
-                          onClick={handleSortClick}
-                        />
-                        {showFilter && (index === 0 || index === 1) && (
-                          // Render input elements for filtering if showFilter is true and column is 0 or 1
-                          <input
-                            type="text"
-                            value={index === 0 ? orgNameFilter : userNameFilter}
-                            onChange={(e) =>
-                              index === 0
-                                ? setOrgNameFilter(e.target.value)
-                                : setUserNameFilter(e.target.value)
-                            }
-                            placeholder={
-                              index === 0
-                                ? "Filter by Org Name"
-                                : "Filter by User Name"
-                            }
-                          />
-                        )}
-                      </th>
-                    );
-                  })}
-                </tr>
-              </thead>
-              <tbody>
-                {currentItems.map((item, index) => {
-                  const { orgName, userName, email, phoneNumber, createdAt } =
-                    item;
-                  return (
-                    <React.Fragment key={userName}>
-                      <tr>
-                        <td>{orgName}</td>
-                        <td>{userName}</td>
-                        <td>{email}</td>
-                        <td>{phoneNumber}</td>
-                        <td>{createdAt}</td>
-                        <td>
-                          <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </td>
-                      </tr>
-                      {index !== currentItems.length - 1 && (
-                        <tr>
-                          <td colSpan={6}>
-                            <hr style={{ borderTop: "1px solid #ddd" }} />
-                          </td>
-                        </tr>
-                      )}
-                    </React.Fragment>
-                  );
-                })}
-              </tbody>
-            </table>
+            <CardSection />
+            {/* Table */}
+            <Table
+              handleSortImageClick={handleSortImageClick}
+              currentItems={currentItems}
+              itemsPerPage={itemsPerPage}
+              isDivVisible={isDivVisible}
+            />
           </div>
           {/* Pagination */}
-          <div className={styles.pagination}>
-            <div className={styles.showing}>
-              Showing{" "}
-              <span>
-                {currentItems.length} <FontAwesomeIcon icon={faChevronDown} />
-              </span>{" "}
-              out of {data.length}
-            </div>
-            <div className={styles.numbering}>
-              <button
-                className={styles.paginationBtn}
-                onClick={prevPage}
-                disabled={currentPage === 1}
-              >
-                <FontAwesomeIcon icon={faChevronLeft} />
-              </button>
-              {currentPage > 3 && (
-                <span className={styles.paginationDots}>...</span>
-              )}
-              {pageNumbers.map((pageNumber) => {
-                if (
-                  (pageNumber === 1 && currentPage === 1) ||
-                  pageNumber === currentPage ||
-                  pageNumber === pageNumbers.length ||
-                  (pageNumber > currentPage - 2 && pageNumber < currentPage + 2)
-                ) {
-                  return (
-                    <button
-                      key={pageNumber}
-                      className={`${styles.paginationNumber} ${
-                        pageNumber === currentPage ? styles.active : ""
-                      }`}
-                      onClick={() => goToPage(pageNumber)}
-                    >
-                      {pageNumber}
-                    </button>
-                  );
-                } else {
-                  return null;
-                }
-              })}
-              {currentPage < pageNumbers.length - 2 && (
-                <span className={styles.paginationDots}>...</span>
-              )}
-              <button
-                className={styles.paginationBtn}
-                onClick={nextPage}
-                disabled={currentPage === pageNumbers.length}
-              >
-                <FontAwesomeIcon icon={faChevronRight} />
-              </button>
-            </div>
-          </div>
+          <Pagination
+            currentItems={currentItems}
+            data={data}
+            currentPage={currentPage}
+            pageNumbers={pageNumbers}
+            prevPage={prevPage}
+            nextPage={nextPage}
+            goToPage={goToPage}
+          />
         </main>
       </div>
     </>

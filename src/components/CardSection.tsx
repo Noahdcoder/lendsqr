@@ -6,9 +6,9 @@ import {
   faFileLines,
   faCoins,
 } from "@fortawesome/free-solid-svg-icons";
-import styles from "@/styles/CardSingle.module.scss";
+import styles from "@/styles/CardSection.module.scss";
 
-export default function CardSingle() {
+export default function CardSection() {
   const categories = [
     {
       id: 1,

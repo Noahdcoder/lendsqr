@@ -38,3 +38,9 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .card {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

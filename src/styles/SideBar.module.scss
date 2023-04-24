@@ -1,5 +1,9 @@
 .aside {
   padding: 2rem;
+  width: 20%;
+  height: 80vh;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
   div {
     margin-bottom: 1rem;
   }
@@ -39,7 +43,45 @@
     color: #213f7d;
     white-space: nowrap;
   }
+  &:hover {
+    overflow-y: scroll;
+  }
   .switch_span {
     margin-left: 0.5rem;
+  }
+}
+
+.aside::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.aside::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.aside::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.aside::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media (max-width: 768px) {
+  .aside {
+    position: absolute; /* Set the second div to relative position */
+    width: 60%;
+    top: 0;
+    left: -100%;
+    z-index: 1;
+    background-color: #ffffff;
+    transition: left 0.3s ease;
+  }
+  /* CSS rules for mobile screens */
+  .slideIn {
+    left: 0;
   }
 }
